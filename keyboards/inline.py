@@ -1,14 +1,18 @@
-from aiogram.types import InlineKeyboardMarkup, InlineKeyboardButton
+from aiogram.types import InlineKeyboardMarkup
+from aiogram.utils.keyboard import InlineKeyboardBuilder
 
-def yes_no_keyboard():
-    kb = InlineKeyboardMarkup(row_width=2)
-    kb.add(
-        InlineKeyboardButton("Да ✅", callback_data="yes"),
-        InlineKeyboardButton("Нет ❌", callback_data="no")
-    )
-    return kb
 
-def cancel_keyboard():
-    kb = InlineKeyboardMarkup(row_width=1)
-    kb.add(InlineKeyboardButton("Отмена ❌", callback_data="cancel"))
-    return kb
+
+def yes_no_keyboard() -> InlineKeyboardMarkup:
+    builder = InlineKeyboardBuilder()
+    builder.button(text="Да ✅", callback_data="yes")
+    builder.button(text="Нет ❌", callback_data="no")
+    builder.adjust(2)
+    return builder.as_markup()
+
+
+
+def cancel_keyboard() -> InlineKeyboardMarkup:
+    builder = InlineKeyboardBuilder()
+    builder.button(text="Отмена ❌", callback_data="cancel")
+    return builder.as_markup()
